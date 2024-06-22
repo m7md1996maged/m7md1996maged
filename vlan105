@@ -1,3 +1,16 @@
-<test>
-
-  
+{
+    ICollection<TSource> collection = source as ICollection<TSource>;
+    if (collection != null)
+    { 
+        return collection.Count;
+    }
+    int num = 0;
+    using (IEnumerator<TSource> enumerator = source.GetEnumerator())
+    {
+        while (enumerator.MoveNext())
+        {
+            num = checked(num + 1);
+        }
+        return num;
+    }
+}
